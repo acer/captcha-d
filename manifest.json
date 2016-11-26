@@ -10,15 +10,12 @@
 	 "https://www.facebook.com/*"
 	],
 	"icons": {},
-	"web_accessible_resources": [
-    	"captcha.html",
-    	"captcha.js"
-   	],
+	"web_accessible_resources": [],
 	"background": {
 		"scripts": ["vendor/jquery-1.11.1.min.js"]
 	},
 	"content_scripts": [ {
-		"js": ["vendor/jquery-1.11.1.min.js", "scripts/index.js", "vendor/jquery.facedetection.min.js"],
+		"js": ["vendor/jquery-1.11.1.min.js", "index.js"],
 		"run_at": "document_end",
 		"matches": [ "http://www.facebook.com/*", "https://www.facebook.com/*" ]
 	}]
