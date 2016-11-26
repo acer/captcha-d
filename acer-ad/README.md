@@ -1,7 +1,7 @@
 #acer serves ad
 not really. Python Flask that serves fake ads
 
-##/api/ad
+## GET - /api/ad
 no arguments.
 
 Response: 200
