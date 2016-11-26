@@ -1,15 +1,5 @@
 console.log("Extension ran!");
 
-var s = document.createElement('script');
-// TODO: add "script.js" to web_accessible_resources in manifest.json
-s.src = chrome.extension.getURL('captcha.js');
-/*
-s.onload = function() {
-    this.remove();
-};
-*/
-(document.head || document.documentElement).appendChild(s);
-
 // news feed parsing
 var newsfeed = $("div[id^='feed_stream']").get(0);
 var processed_stories = [];
@@ -44,11 +34,15 @@ function process_story(story_elem) {
 	processed_stories.push(story_elem.id);
 
 	story.css('filter', 'blur(5px)');
-	var captcha_div = $("<div id='captcha'></div>");
-	var catcha_url = chrome.extension.getURL("captcha.html")
-	captcha_div.load(catcha_url);
 
-	story.after(captcha_div);
+    var captcha_id = Math.round(Math.random() * 1000000000);
+	var captcha_elem = $("<button>Solve Captcha</button>");
+	captcha_elem.attr("id", "captcha_" + captcha_id);
+	captcha_elem.click(function() {
+        var init_captcha_event = new CustomEvent('init_captcha', { 'detail': this.id });
+        document.dispatchEvent(init_captcha_event);
+	});
+	story.after(captcha_elem);
 }
 
 
@@ -82,4 +76,37 @@ function blurFaces (el, story) {
       });
     }
   }
+}
+
+document.addEventListener('init_captcha', function(e) {
+	var captcha_button_id = e.detail;
+	var captcha_id = captcha_button_id.split("_")[1];
+	console.log("Event received from " + e.detail);
+
+	var captcha_button = $('#' + captcha_button_id);
+
+	var captcha_elem = $("<iframe src='https://zlwaterfield.github.io/'></div>");
+	captcha_elem.attr("id", "captcha_" + captcha_id);
+	captcha_button.after(captcha_elem);
+	var captcha_dom_elem = captcha_elem[0];
+	console.log(captcha_elem);
+	console.log(captcha_dom_elem.contentWindow);
+	captcha_dom_elem.contentWindow.postMessage(captcha_id, "*")
+	captcha_button.remove();
+});
+
+
+window.addEventListener("message", receiveMessage, false);
+
+function receiveMessage(event)
+{
+	var origin = event.origin || event.originalEvent.origin; // For Chrome, the origin property is in the event.originalEvent object.
+	if (origin !== "https://zlwaterfield.github.io")
+		return;
+
+	captcha_success(event.data);
+}
+
+function captcha_success(captcha_winner_id) {
+	console.log("Winner winner chicken dinner for " + captcha_winner_id);
 }
