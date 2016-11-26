@@ -17,8 +17,8 @@ Response: 200
 }
 ```
 
-## /pics/<filename>
-Arguments: 
-    filename: 01.jpg, 02.jpg, ...., 09.jpg
+## /pics/\{filename\}
+Arguments:
+- filename: 01.jpg, 02.jpg, ...., 09.jpg
 
 returns the jpeg file. No JSON for you.
