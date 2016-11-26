@@ -1,6 +1,7 @@
 var image = $("#alexio");
 console.log(image);
-$('#alexio').faceDetection({
+
+image.faceDetection({
         complete: function (faces) {
             console.log(faces);
         }
