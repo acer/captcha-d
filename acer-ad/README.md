@@ -16,3 +16,9 @@ Response: 200
     url: "https://url.to/url"
 }
 ```
+
+## /pics/<filename>
+Arguments: 
+    filename: 01.jpg, 02.jpg, ...., 09.jpg
+
+returns the jpeg file. No JSON for you.
