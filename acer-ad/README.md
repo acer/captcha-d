@@ -19,6 +19,6 @@ Response: 200
 
 ## /pics/\{filename\}
 Arguments:
-- filename: 01.jpg, 02.jpg, ...., 09.jpg
+- filename: get from /api/ad
 
-returns the jpeg file. No JSON for you.
+serves a picture. No JSON for you.

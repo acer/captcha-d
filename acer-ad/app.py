@@ -5,6 +5,15 @@ import random
 app = Flask(__name__)
 
 pic_base_url = "http://localhost.5000/pics"
+
+shitty_pics = [
+    "getprohockey.gif",
+    "getproshakew8.gif",
+    "compnerd.jpg",
+    "hilary_server.jpg",
+    "doge_ad.jpg"
+]
+
 shitty_url = [
     "penisland",
     "speedofart",
@@ -24,7 +33,7 @@ def index():
 
 @app.route('/api/ad', methods=['GET'])
 def serve_ads():
-    final_filename = pic_base_url + '/0' + str(random.randint(1,9)) + '.jpg'
+    final_filename = pic_base_url + '/' + shitty_pics[random.randint(0,4)]
     final_url = 'http://www.' + shitty_url[random.randint(0,9)] + '.com' 
     return jsonify({'picture': final_filename, 'url': final_url})
 
