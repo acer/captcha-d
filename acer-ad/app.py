@@ -9,12 +9,9 @@ pic_base_url = "http://localhost.5000/pics"
 shitty_pics = [
     "getprohockey.gif",
     "getproshakew8.gif",
-    "getpro.gif",
+    "compnerd.jpg",
     "hilary_server.jpg",
-    "doge_ad.jpg",
-    "ph.jpg",
-    "phh.jpg",
-    "phhh.jpg"
+    "doge_ad.jpg"
 ]
 
 shitty_url = [
@@ -36,7 +33,7 @@ def index():
 
 @app.route('/api/ad', methods=['GET'])
 def serve_ads():
-    final_filename = pic_base_url + '/' + shitty_pics[random.randint(0,7)]
+    final_filename = pic_base_url + '/' + shitty_pics[random.randint(0,4)]
     final_url = 'http://www.' + shitty_url[random.randint(0,9)] + '.com' 
     return jsonify({'picture': final_filename, 'url': final_url})
 

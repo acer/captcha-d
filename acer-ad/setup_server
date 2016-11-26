@@ -1,3 +1,2 @@
 virtualenv flask
 flask/bin/pip flask
-#wget for the pic tarball
