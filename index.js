@@ -50,3 +50,36 @@ function process_story(story_elem) {
 
 	story.after(captcha_div);
 }
+
+
+function blurFaces (el, story) {
+  if ($(el).has("img") && $(el).has("img").length > 0) {
+    var image = $(el).find("img")
+    var g = new Image()
+    g.crossOrigin = 'anonymous'
+    g.src = image[0].currentSrc
+    var j_el = $(g)
+
+    if (j_el.faceDetection ) {
+      j_el.faceDetection({
+        complete: function (faces) {
+          console.log(faces);
+          for (var i = 0; i < faces.length; i++) {
+              $('<div>', {
+                  'class':'face',
+                  'css': {
+                      'position': 'absolute',
+                      'left':     faces[i].x * faces[i].scaleX - 10 + 'px',
+                      'top':      faces[i].y * faces[i].scaleY - 10 + 'px',
+                      'width':    faces[i].width  * faces[i].scaleX + 10 + 'px',
+                      'height':   faces[i].height * faces[i].scaleY + 10 + 'px'
+                  }
+              })
+              .insertAfter(this);
+          }
+          story.css('filter', 'blur(0)')
+        }
+      });
+    }
+  }
+}

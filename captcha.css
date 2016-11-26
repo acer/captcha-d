@@ -1,11 +1,28 @@
-.image-container {
-  padding: 5px;
+.picture-container {
+    position: relative;
+    width: 600px;
+    height: auto;
+    margin: 20px auto;
+    border: 10px solid #fff;
+    box-shadow: 0 5px 5px #000;
 }
 
-.image-container .image {
-  text-align: center;
+.picture {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
-.message {
-  text-align: center;
+.face {
+    position: absolute;
+    border: 2px solid #FFF;
+    background: hsla(0,17%,84%,1);
+    box-shadow: 5px 3px 30px black;
+    overflow: hidden;
+    filter: blur(5px);
+    border-radius: 15px;
+}
+
+.blur-image {
+    filter: blur(10px);
 }

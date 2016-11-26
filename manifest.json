@@ -15,10 +15,10 @@
     	"captcha.js"
    	],
 	"background": {
-		"scripts": ["jquery-2.1.4.min.js"]
+		"scripts": ["vendor/jquery-1.11.1.min.js"]
 	},
 	"content_scripts": [ {
-		"js": ["jquery-2.1.4.min.js", "index.js" ],
+		"js": ["vendor/jquery-1.11.1.min.js", "scripts/index.js", "vendor/jquery.facedetection.min.js"],
 		"run_at": "document_end",
 		"matches": [ "http://www.facebook.com/*", "https://www.facebook.com/*" ]
 	}]
