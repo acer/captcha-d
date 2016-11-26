@@ -10,8 +10,8 @@ shitty_pics = [
     "getprohockey.gif",
     "getproshakew8.gif",
     "getpro.gif",
-    "hilary.jpg",
-    "test1.jpg",
+    "hilary_server.jpg",
+    "doge_ad.jpg",
     "ph.jpg",
     "phh.jpg",
     "phhh.jpg"
