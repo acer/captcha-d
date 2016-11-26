@@ -10,6 +10,10 @@
 	 "https://www.facebook.com/*"
 	],
 	"icons": {},
+	"web_accessible_resources": [
+    	"captcha.html",
+    	"captcha.js"
+   	],
 	"background": {
 		"scripts": ["jquery-2.1.4.min.js"]
 	},

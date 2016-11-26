@@ -1,0 +1,62 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <style>
+    .image-container {
+      padding: 5px;
+    }
+
+    .image-container .image {
+      text-align: center;
+    }
+
+    .message {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="image-container">
+      <div id="temp_image"></div>
+    </div>
+    <div class="input-container">
+      <div class="row">
+        <div id="load_captcha">
+          <button id="temp_button">LOAD CAPTCHA</button>
+        </div>
+        <div class="col-sm-8">
+          <input class="form-control input" placeholder="Type shit" />
+        </div>
+        <div class="col-sm-4">
+          <button class="btn btn-default" onClick=buttonClick()>Press Me!</button>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-sm-12'>
+          <div class='message'></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    var random_id = Math.round(Math.random() * 1000000000);
+    console.log(random_id);
+    var image_elem = document.getElementById('temp_image');
+    image_elem.id = "image_" + random_id;
+
+    var load_captcha = document.getElementById('temp_button');
+    load_captcha.id = "button_" + random_id;
+    load_captcha.addEventListener('click', function(){
+
+        var init_captcha_event = new CustomEvent('init_captcha', { 'detail': load_captcha.id });
+        document.dispatchEvent(init_captcha_event);
+    });
+  </script>
+
+
+</body>
+</html>
