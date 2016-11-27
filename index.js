@@ -4,20 +4,22 @@ console.log("Extension ran!");
 var newsfeed = $("div[id^='feed_stream']").get(0);
 var processed_stories = [];
 var ads = ['compnerd.jpg', 'doge_ad.jpg', 'getprohockey.gif', 'getproshakew8.gif', 'hillary_server.jpg'];
-var image_styling = {
-  width: 200 + 'px',
+var image_styling1 = {
+  width: 300 + 'px',
   height: 'auto',
   position: 'absolute',
-  'z-index': 10
+  'z-index': 10,
+  left: 10 + 'px',
+  'margin-top': -250 + 'px'
 }
-
-var image_styling1 = image_styling
-image_styling['left'] = 10 + 'px'
-image_styling['top'] = -300 + 'px'
-
-var image_styling2 = image_styling
-image_styling['right'] = 10 + 'px'
-image_styling['top'] = -300 + 'px'
+var image_styling2 = {
+  width: 300 + 'px',
+  height: 'auto',
+  position: 'absolute',
+  'z-index': 10,
+  right: 100 + 'px',
+  'margin-top': -200 + 'px'
+}
 
 // currently, the observer will find all news feed stories
 var observer = new MutationObserver(function(mutations) {
