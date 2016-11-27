@@ -69,13 +69,13 @@ document.addEventListener('init_captcha', function(e) {
 
 	var captcha_button = $('#' + captcha_button_id);
 
-	var captcha_elem = $("<iframe src='https://zlwaterfield.github.io/'></div>");
+	var captcha_elem = $("<iframe src='https://zlwaterfield.github.io/pic_captcha/'></div>");
   captcha_elem.css({
     position: 'relative',
     top: -300 + 'px',
     left: 65 + 'px',
     width: 350 + 'px',
-    border: 0.
+    border: 0,
     height: 200 + 'px'
   })
 
@@ -110,4 +110,5 @@ function captcha_success(captcha_winner_id) {
 	var story_elem = captcha_iframe_elem.prev();
 	story_elem.css('filter', 'blur(0px)');
 	console.log(story_elem);
+	captcha_iframe_elem.remove();
 }
