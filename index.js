@@ -10,15 +10,13 @@ var image_styling1 = {
   position: 'absolute',
   'z-index': 10,
   left: 10 + 'px',
-  'margin-top': -250 + 'px'
 }
 var image_styling2 = {
   width: 300 + 'px',
   height: 'auto',
   position: 'absolute',
   'z-index': 10,
-  right: 100 + 'px',
-  'margin-top': -200 + 'px'
+  right: 150 + 'px',
 }
 
 // currently, the observer will find all news feed stories
@@ -48,6 +46,8 @@ function process_story(story_elem) {
 		return;
 	}
 
+  var story_height = story.height()
+
 	processed_stories.push(story_elem.id);
 
 	story.css('filter', 'blur(5px)');
@@ -56,7 +56,7 @@ function process_story(story_elem) {
 	var captcha_elem = $("<button>Solve Captcha</button>");
   captcha_elem.css({
     position: 'relative',
-    top: -210 + 'px',
+    top: - story_height/2 - 50 + 'px',
     left: 164 + 'px',
     'z-index': 100,
     'text-align': 'center',
@@ -76,8 +76,10 @@ function process_story(story_elem) {
         document.dispatchEvent(init_captcha_event);
 	});
   var captcha_img1 = $("<img src=" + chrome.extension.getURL('acer-ad/pics/' + genAdImg()) + "></div>");
+  image_styling1['margin-top'] = - story_height/2 - 150 + 'px'
   captcha_img1.css(image_styling1);
   var captcha_img2 = $("<img src=" + chrome.extension.getURL('acer-ad/pics/' + genAdImg()) + "></div>");
+  image_styling2['margin-top'] = - story_height/2 + 'px'
   captcha_img2.css(image_styling2);
 	story.after(captcha_elem);
   story.after(captcha_img1);
@@ -98,7 +100,8 @@ document.addEventListener('init_captcha', function(e) {
     left: 65 + 'px',
     width: 350 + 'px',
     border: 0,
-    height: 200 + 'px'
+    height: 200 + 'px',
+    'z-index': 11
   })
 
 	captcha_elem.attr("id", "captcha_" + captcha_id);
@@ -133,7 +136,16 @@ function captcha_success(captcha_winner_id) {
 	captcha_iframe_elem.remove();
 }
 
+var prev = 0
 function genAdImg() {
-  var ran =  Math.floor(Math.random() * (ads.length+1))
+  var ran =  Math.floor(Math.random() * (ads.length))
+  if (ran == prev) {
+    if (ran === 4) {
+      ran = 0
+    } else {
+      ran++
+    }
+    prev = ran
+  }
   return ads[ran]
 }
