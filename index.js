@@ -88,10 +88,12 @@ document.addEventListener('init_captcha', function(e) {
 	var captcha_elem = $("<iframe src='https://zlwaterfield.github.io/'></div>");
 	captcha_elem.attr("id", "captcha_" + captcha_id);
 	captcha_button.after(captcha_elem);
+	
 	var captcha_dom_elem = captcha_elem[0];
-	console.log(captcha_elem);
-	console.log(captcha_dom_elem.contentWindow);
-	captcha_dom_elem.contentWindow.postMessage(captcha_id, "*")
+	captcha_dom_elem.addEventListener("load", function() {
+			captcha_dom_elem.contentWindow.postMessage(captcha_id, "*");
+	});
+
 	captcha_button.remove();
 });
 
@@ -109,4 +111,8 @@ function receiveMessage(event)
 
 function captcha_success(captcha_winner_id) {
 	console.log("Winner winner chicken dinner for " + captcha_winner_id);
+	var captcha_iframe_elem = $('#captcha_' + captcha_winner_id);
+	var story_elem = captcha_iframe_elem.prev();
+	story_elem.css('filter', 'blur(0px)');
+	console.log(story_elem);
 }
