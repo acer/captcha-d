@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 
-	"name": "Captcha'd",
+	"name": "Photo Ensconcing Non Identifiable Social (P.E.N.I.S) Media ",
 	"description": "Makes sure that you're very very real human.",
 	"version": "0.1",
 	"permissions": [
@@ -10,7 +10,13 @@
 	 "https://www.facebook.com/*"
 	],
 	"icons": {},
-	"web_accessible_resources": [],
+	"web_accessible_resources": [
+		"acer-ad/pics/compnerd.jpg",
+		"acer-ad/pics/doge_ad.jpg",
+		"acer-ad/pics/getprohockey.gif",
+		"acer-ad/pics/getproshakew8.gif",
+		"acer-ad/pics/hillary_server.jpg"
+	],
 	"background": {
 		"scripts": ["vendor/jquery-1.11.1.min.js"]
 	},
