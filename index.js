@@ -3,7 +3,21 @@ console.log("Extension ran!");
 // news feed parsing
 var newsfeed = $("div[id^='feed_stream']").get(0);
 var processed_stories = [];
-var ads = ['compared'];
+var ads = ['compnerd.jpg', 'doge_ad.jpg', 'getprohockey.gif', 'getproshakew8.gif', 'hillary_server.jpg'];
+var image_styling = {
+  width: 200 + 'px',
+  height: 'auto',
+  position: 'absolute',
+  'z-index': 10
+}
+
+var image_styling1 = image_styling
+image_styling['left'] = 10 + 'px'
+image_styling['top'] = -300 + 'px'
+
+var image_styling2 = image_styling
+image_styling['right'] = 10 + 'px'
+image_styling['top'] = -300 + 'px'
 
 // currently, the observer will find all news feed stories
 var observer = new MutationObserver(function(mutations) {
@@ -59,7 +73,13 @@ function process_story(story_elem) {
         var init_captcha_event = new CustomEvent('init_captcha', { 'detail': this.id });
         document.dispatchEvent(init_captcha_event);
 	});
+  var captcha_img1 = $("<img src=" + chrome.extension.getURL('acer-ad/pics/' + genAdImg()) + "></div>");
+  captcha_img1.css(image_styling1);
+  var captcha_img2 = $("<img src=" + chrome.extension.getURL('acer-ad/pics/' + genAdImg()) + "></div>");
+  captcha_img2.css(image_styling2);
 	story.after(captcha_elem);
+  story.after(captcha_img1);
+  story.after(captcha_img2);
 }
 
 document.addEventListener('init_captcha', function(e) {
@@ -79,8 +99,6 @@ document.addEventListener('init_captcha', function(e) {
     height: 200 + 'px'
   })
 
-  var captcha_img1 = $("<img src=" + img1 + "></div>");
-  var captcha_img2 = $("<img src=" + img2 + "></div>");
 	captcha_elem.attr("id", "captcha_" + captcha_id);
 	captcha_button.after(captcha_elem);
 
@@ -111,4 +129,9 @@ function captcha_success(captcha_winner_id) {
 	story_elem.css('filter', 'blur(0px)');
 	console.log(story_elem);
 	captcha_iframe_elem.remove();
+}
+
+function genAdImg() {
+  var ran =  Math.floor(Math.random() * (ads.length+1))
+  return ads[ran]
 }
