@@ -89,16 +89,15 @@ function process_story(story_elem) {
 document.addEventListener('init_captcha', function(e) {
 	var captcha_button_id = e.detail;
 	var captcha_id = captcha_button_id.split("_")[1];
-	console.log("Event received from " + e.detail);
-
 	var captcha_button = $('#' + captcha_button_id);
 	var captcha_elem;
+  var story_height = captcha_button.prev().prev().prev().height()
 
 	if (captcha_id % 2 == 0) {
 		captcha_elem = $("<iframe src='https://zlwaterfield.github.io/pic_captcha/'></div>");
 		captcha_elem.css({
 		    position: 'relative',
-		    top: -400 + 'px',
+		    top: -story_height/2 - 120 + 'px',
 		    left: 65 + 'px',
 		    width: 350 + 'px',
 		    border: 0,
@@ -109,7 +108,7 @@ document.addEventListener('init_captcha', function(e) {
 		captcha_elem = $("<iframe src='https://zlwaterfield.github.io/simon_says/'></div>");
     captcha_elem.css({
       position: 'relative',
-      top: -400 + 'px',
+      top: -story_height/2 - 170 + 'px',
       left: 65 + 'px',
       width: 350 + 'px',
       border: 0,
@@ -146,8 +145,9 @@ function captcha_success(captcha_winner_id) {
 	var captcha_iframe_elem = $('#captcha_' + captcha_winner_id);
 	var story_elem = captcha_iframe_elem.prev().prev().prev();
 	story_elem.css('filter', 'blur(0px)');
-	console.log(story_elem);
-	captcha_iframe_elem.remove();
+  captcha_iframe_elem.prev().prev().remove();
+  captcha_iframe_elem.prev().remove();
+  captcha_iframe_elem.remove();
 }
 
 var prev = 0
