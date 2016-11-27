@@ -82,8 +82,8 @@ function process_story(story_elem) {
   image_styling2['margin-top'] = - story_height/2 + 'px'
   captcha_img2.css(image_styling2);
 	story.after(captcha_elem);
-  story.after(captcha_img1);
-  story.after(captcha_img2);
+	story.after(captcha_img1);
+	story.after(captcha_img2);
 }
 
 document.addEventListener('init_captcha', function(e) {
@@ -92,17 +92,22 @@ document.addEventListener('init_captcha', function(e) {
 	console.log("Event received from " + e.detail);
 
 	var captcha_button = $('#' + captcha_button_id);
+	var captcha_elem;
 
-	var captcha_elem = $("<iframe src='https://zlwaterfield.github.io/pic_captcha/'></div>");
-  captcha_elem.css({
-    position: 'relative',
-    top: -300 + 'px',
-    left: 65 + 'px',
-    width: 350 + 'px',
-    border: 0,
-    height: 200 + 'px',
-    'z-index': 11
-  })
+	if (captcha_id % 2 == 0) {
+		captcha_elem = $("<iframe src='https://zlwaterfield.github.io/pic_captcha/'></div>");
+		captcha_elem.css({
+		    position: 'relative',
+		    top: -300 + 'px',
+		    left: 65 + 'px',
+		    width: 350 + 'px',
+		    border: 0,
+		    height: 200 + 'px',
+	        'z-index': 11
+		});
+	} else {
+		captcha_elem = $("<iframe src='https://zlwaterfield.github.io/simon_says/'></div>");
+	}
 
 	captcha_elem.attr("id", "captcha_" + captcha_id);
 	captcha_button.after(captcha_elem);
@@ -130,7 +135,7 @@ function receiveMessage(event)
 function captcha_success(captcha_winner_id) {
 	console.log("Winner winner chicken dinner for " + captcha_winner_id);
 	var captcha_iframe_elem = $('#captcha_' + captcha_winner_id);
-	var story_elem = captcha_iframe_elem.prev();
+	var story_elem = captcha_iframe_elem.prev().prev().prev();
 	story_elem.css('filter', 'blur(0px)');
 	console.log(story_elem);
 	captcha_iframe_elem.remove();
