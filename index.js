@@ -35,8 +35,24 @@ function process_story(story_elem) {
 
 	story.css('filter', 'blur(5px)');
 
-    var captcha_id = Math.round(Math.random() * 1000000000);
+  var captcha_id = Math.round(Math.random() * 1000000000);
 	var captcha_elem = $("<button>Solve Captcha</button>");
+  captcha_elem.css({
+    position: 'relative',
+    top: -210 + 'px',
+    left: 164 + 'px',
+    'z-index': 100,
+    'text-align': 'center',
+    width: 'auto',
+    padding: 15 + 'px',
+    'font-size': 1.5 + 'em',
+    background: 'RGBA(74, 170, 165, 1.00)',
+    border: 'RGBA(74, 170, 165, 1.00)',
+    'border-radius': 3 + 'px',
+    cursor: 'pointer',
+    color: '#fff',
+    'font-weight': 700
+  })
 	captcha_elem.attr("id", "captcha_" + captcha_id);
 	captcha_elem.click(function() {
         var init_captcha_event = new CustomEvent('init_captcha', { 'detail': this.id });
@@ -86,9 +102,17 @@ document.addEventListener('init_captcha', function(e) {
 	var captcha_button = $('#' + captcha_button_id);
 
 	var captcha_elem = $("<iframe src='https://zlwaterfield.github.io/'></div>");
+  captcha_elem.css({
+    position: 'relative',
+    top: -300 + 'px',
+    left: 65 + 'px',
+    width: 350 + 'px',
+    border: 0.
+    height: 200 + 'px'
+  })
 	captcha_elem.attr("id", "captcha_" + captcha_id);
 	captcha_button.after(captcha_elem);
-	
+
 	var captcha_dom_elem = captcha_elem[0];
 	captcha_dom_elem.addEventListener("load", function() {
 			captcha_dom_elem.contentWindow.postMessage(captcha_id, "*");
