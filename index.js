@@ -3,6 +3,7 @@ console.log("Extension ran!");
 // news feed parsing
 var newsfeed = $("div[id^='feed_stream']").get(0);
 var processed_stories = [];
+var ads = ['compared'];
 
 // currently, the observer will find all news feed stories
 var observer = new MutationObserver(function(mutations) {
@@ -61,39 +62,6 @@ function process_story(story_elem) {
 	story.after(captcha_elem);
 }
 
-
-function blurFaces (el, story) {
-  if ($(el).has("img") && $(el).has("img").length > 0) {
-    var image = $(el).find("img")
-    var g = new Image()
-    g.crossOrigin = 'anonymous'
-    g.src = image[0].currentSrc
-    var j_el = $(g)
-
-    if (j_el.faceDetection ) {
-      j_el.faceDetection({
-        complete: function (faces) {
-          console.log(faces);
-          for (var i = 0; i < faces.length; i++) {
-              $('<div>', {
-                  'class':'face',
-                  'css': {
-                      'position': 'absolute',
-                      'left':     faces[i].x * faces[i].scaleX - 10 + 'px',
-                      'top':      faces[i].y * faces[i].scaleY - 10 + 'px',
-                      'width':    faces[i].width  * faces[i].scaleX + 10 + 'px',
-                      'height':   faces[i].height * faces[i].scaleY + 10 + 'px'
-                  }
-              })
-              .insertAfter(this);
-          }
-          story.css('filter', 'blur(0)')
-        }
-      });
-    }
-  }
-}
-
 document.addEventListener('init_captcha', function(e) {
 	var captcha_button_id = e.detail;
 	var captcha_id = captcha_button_id.split("_")[1];
@@ -110,6 +78,9 @@ document.addEventListener('init_captcha', function(e) {
     border: 0.
     height: 200 + 'px'
   })
+
+  var captcha_img1 = $("<img src=" + img1 + "></div>");
+  var captcha_img2 = $("<img src=" + img2 + "></div>");
 	captcha_elem.attr("id", "captcha_" + captcha_id);
 	captcha_button.after(captcha_elem);
 
