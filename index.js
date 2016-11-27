@@ -98,15 +98,24 @@ document.addEventListener('init_captcha', function(e) {
 		captcha_elem = $("<iframe src='https://zlwaterfield.github.io/pic_captcha/'></div>");
 		captcha_elem.css({
 		    position: 'relative',
-		    top: -300 + 'px',
+		    top: -400 + 'px',
 		    left: 65 + 'px',
 		    width: 350 + 'px',
 		    border: 0,
 		    height: 200 + 'px',
-	        'z-index': 11
+        'z-index': 11
 		});
 	} else {
 		captcha_elem = $("<iframe src='https://zlwaterfield.github.io/simon_says/'></div>");
+    captcha_elem.css({
+      position: 'relative',
+      top: -400 + 'px',
+      left: 65 + 'px',
+      width: 350 + 'px',
+      border: 0,
+      height: 380 + 'px',
+      'z-index': 11
+    });
 	}
 
 	captcha_elem.attr("id", "captcha_" + captcha_id);
